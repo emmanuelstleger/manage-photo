@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class GalerieController extends AbstractController
 {
     /**
-     * @Route("/", name="galerie_index", methods={"GET"})
+     * @Route("/", name="galerie_admin_index", methods={"GET"})
      */
     public function index(GalerieRepository $galerieRepository): Response
     {
@@ -69,7 +69,7 @@ class GalerieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('galerie_index');
+            return $this->redirectToRoute('galerie_admin_index');
         }
 
         return $this->render('galerie/edit.html.twig', [

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-security.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
@@ -7,17 +7,29 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <h1>Inscription</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.nom) }}
-        {{ form_row(registrationForm.prenom) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
+    {{ form_start(registrationForm, {'attr': {'class': 'user'}}) }}
+        <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                {{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control form-control-user','placeholder':'Votre prenom'}}) }}
+            </div>
+            <div class="col-sm-6">
+                {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control form-control-user','placeholder':'Votre nom'}}) }}
+
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control form-control-user','placeholder':'Votre email'}}) }}
+
+        </div>
+        <div class="form-group">
+            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control form-control-user','placeholder':'Votre mot de passe'}}) }}
+
+        </div>
+
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn btn-primary btn-user btn-block" >Inscription</button>
     {{ form_end(registrationForm) }}
 {% endblock %}

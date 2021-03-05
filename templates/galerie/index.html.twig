@@ -1,11 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-admin.html.twig' %}
 
 {% block title %}Galerie index{% endblock %}
 
 {% block body %}
     <h1>Galerie index</h1>
 
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Id</th>
@@ -33,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('galerie_new') }}">Create new</a>
+    <a href="{{ path('galerie_new') }}" class="btn btn-success btn-lg">Create new</a>
 {% endblock %}

@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PhotoController extends AbstractController
 {
     /**
-     * @Route("/", name="photo_index", methods={"GET"})
+     * @Route("/", name="photo_admin_index", methods={"GET"})
      */
     public function index(PhotoRepository $photoRepository): Response
     {
