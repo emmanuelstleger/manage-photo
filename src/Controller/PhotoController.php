@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/photo")
+ * @Route("dashboard/photo")
  */
 class PhotoController extends AbstractController
 {

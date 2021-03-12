@@ -1,0 +1,15 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h2>Content de vous revoir {{ app.user.prenom }}</h2>
+            <a class="btn-lg btn btn-success text-center" href="{{ path('galerie_admin_index') }}">Accéder à la gestion des galeries</a>
+        </div>
+    </div>
+
+
+{% endblock %}
