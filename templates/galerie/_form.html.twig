@@ -8,5 +8,6 @@
         {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
     </div>
 
-    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-success"><i class="fa fa-edit"></i> {{ button_label|default('Sauvegarder') }}</button>
+    <a class="btn btn-primary" href="{{ path('galerie_admin_index') }}">Retour</a>
 {{ form_end(form) }}

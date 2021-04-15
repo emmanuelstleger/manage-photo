@@ -3,8 +3,73 @@
 {% block title %}Edit Galerie{% endblock %}
 
 {% block body %}
-    <h1>Edit Galerie</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4 mb-lg-0">
+                <div class="card-body">
+                    <h3 class="card-title">Information de la galerie</h3>
 
-    {{ include('galerie/_form.html.twig', {'button_label': 'Update'}) }}
+                     {{ include('galerie/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card mb-4 mb-lg-0">
+                <div class="card-body">
+                    <h3 class="card-title">Photos de la galerie</h3>
+                    <p class="card-text font-italic">Ajoutez vos nouvelles images ici</p>
+                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
+                            <i class="fa fa-plus-square"></i> Ajouter une photo
+                        </button>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Titre</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Image</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for photo in galerie.photos %}
+                            <tr>
+                                    <td>{{ photo.titre }}</td>
+                                    <td>{{ photo.description }}</td>
+                                    <td>{{ photo.file }}</td>
+                            </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter une photo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                            {{ form_start(form2) }}
+                            {{ form_widget(form2) }}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-success"><i class="fas fa-file-download"></i> {{ button_label|default('Enregistrer') }}</button>
+                    </div>
+                    {{ form_end(form2) }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
 
 {% endblock %}

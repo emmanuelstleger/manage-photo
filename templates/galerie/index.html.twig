@@ -3,15 +3,15 @@
 {% block title %}Galerie index{% endblock %}
 
 {% block body %}
-    <h1>Galerie index</h1>
-
+    <h1>Index des galeries</h1>
+    <a href="{{ path('galerie_new') }}" class="btn btn-success btn-lg mb-3">Créer une galerie</a>
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Titre</th>
                 <th>Description</th>
-                <th>actions</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -21,8 +21,7 @@
                 <td>{{ galerie.titre }}</td>
                 <td>{{ galerie.description }}</td>
                 <td>
-                    <a href="{{ path('galerie_show', {'id': galerie.id}) }}">show</a>
-                    <a href="{{ path('galerie_edit', {'id': galerie.id}) }}">edit</a>
+                    <a href="{{ path('galerie_edit', {'id': galerie.id}) }}" class="btn btn-success btn-sm"> <i class="fa fa-pencil-alt"></i> Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -32,6 +31,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('galerie_new') }}" class="btn btn-success btn-lg">Create new</a>
 {% endblock %}

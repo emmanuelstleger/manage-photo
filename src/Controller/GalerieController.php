@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Galerie;
+use App\Entity\Photo;
 use App\Form\GalerieType;
+use App\Form\PhotoType;
 use App\Repository\GalerieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +41,7 @@ class GalerieController extends AbstractController
             $entityManager->persist($galerie);
             $entityManager->flush();
 
-            return $this->redirectToRoute('galerie_index');
+            return $this->redirectToRoute('galerie_admin_index');
         }
 
         return $this->render('galerie/new.html.twig', [
@@ -66,15 +68,28 @@ class GalerieController extends AbstractController
         $form = $this->createForm(GalerieType::class, $galerie);
         $form->handleRequest($request);
 
+
+        $photo = new Photo();
+        $form2 = $this->createForm(PhotoType::class, $photo);
+        $form2->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('galerie_admin_index');
         }
 
+        if ($form2->isSubmitted() && $form2->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $photo->setGalerie($galerie)->setUser($this->getUser());
+            $entityManager->persist($photo);
+            $entityManager->flush();
+        }
+
         return $this->render('galerie/edit.html.twig', [
             'galerie' => $galerie,
             'form' => $form->createView(),
+            'form2'=> $form2->createView(),
         ]);
     }
 
