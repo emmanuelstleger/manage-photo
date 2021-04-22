@@ -104,6 +104,6 @@ class GalerieController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('galerie_index');
+        return $this->redirectToRoute('galerie_admin_index');
     }
 }

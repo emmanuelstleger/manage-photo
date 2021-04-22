@@ -39,7 +39,7 @@ class PhotoController extends AbstractController
             $entityManager->persist($photo);
             $entityManager->flush();
 
-            return $this->redirectToRoute('photo_index');
+            return $this->redirectToRoute('photo_admin_index');
         }
 
         return $this->render('photo/new.html.twig', [
@@ -69,7 +69,7 @@ class PhotoController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('photo_index');
+            return $this->redirectToRoute('photo_admin_index');
         }
 
         return $this->render('photo/edit.html.twig', [
@@ -89,6 +89,6 @@ class PhotoController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('photo_index');
+        return $this->redirectToRoute('photo_admin_index');
     }
 }

@@ -27,10 +27,10 @@
             {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control form-control-user','placeholder':'Votre mot de passe'}}) }}
 
         </div>
-
-        {{ form_row(registrationForm.agreeTerms) }}
-
+        <div class="form-group">
+            {{ form_row(registrationForm.agreeTerms) }}
+        </div>
         <button type="submit" class="btn btn-primary btn-user btn-block" >Inscription</button>
-
+        <a href="{{ path('app_login') }}" class="btn btn-secondary btn-user btn-block">Se connecter</a>
     {{ form_end(registrationForm) }}
 {% endblock %}

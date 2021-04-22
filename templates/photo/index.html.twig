@@ -12,9 +12,9 @@
                 <th>Titre</th>
                 <th>Description</th>
                 <th>File</th>
-                <th>CreatedAt</th>
-                <th>UpdateAt</th>
-                <th>actions</th>
+                <th>Créé le</th>
+                <th>Aperçu</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -25,10 +25,10 @@
                 <td>{{ photo.description }}</td>
                 <td>{{ photo.file }}</td>
                 <td>{{ photo.createdAt ? photo.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ photo.updateAt ? photo.updateAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td><img src="{{ vich_uploader_asset(photo) }}" alt="" style="width: 100px; height: 100px;"></td>
                 <td>
-                    <a href="{{ path('photo_show', {'id': photo.id}) }}"class="btn btn-primary mb-1 btn-sm"> <i class="fa fa-eye"></i> Voir</a>
-                    <a href="{{ path('photo_edit', {'id': photo.id}) }}" class="btn btn-success btn-sm"> <i class="fa fa-pencil-alt"></i> Editer</a>
+                    <a href="{{ path('photo_edit', {'id': photo.id}) }}" class="btn btn-success mb-1 btn-sm"> <i class="fa fa-pencil-alt"></i> Modifier</a>
+                    <a href="{{ path('photo_delete', {'id': photo.id}) }}" class="btn btn-danger mb-1 btn-sm"> <i class="fa fa-trash"></i> Supprimer</a>
                 </td>
             </tr>
         {% else %}
