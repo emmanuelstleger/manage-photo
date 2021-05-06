@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ galerie.titre }}{% endblock %}
+
+{% block body %}
+
+    <div id="fh5co-main">
+        <div class="fh5co-narrow-content animate-box fh5co-border-bottom" data-animate-effect="fadeInLeft">
+            <h2 class="fh5co-heading" >{{ galerie.titre }}</span></h2>
+            <p>{{ galerie.description }}</p>
+
+            {% for photo in galerie.photos %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <figure><img src="{{ vich_uploader_asset(photo) }}" alt="{{ photo.description }}" class="img-responsive"></figure>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="col-md-12">
+                <p class="text-center"><a href="{{ path ('front_portfolio') }}" class="btn btn-primary btn-outline">Plus de photos</a></p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

@@ -6,6 +6,7 @@ use App\Entity\Galerie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class GalerieType extends AbstractType
 {
@@ -14,6 +15,7 @@ class GalerieType extends AbstractType
         $builder
             ->add('titre')
             ->add('description')
+            ->add('imageFile', VichImageType::class)
         ;
     }
 

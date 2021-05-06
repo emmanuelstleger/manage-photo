@@ -37,7 +37,7 @@ class Photo
     private $file;
 
     /**
-     * @Vich\UploadableField(mapping="photo_images", fileNameProperty="file")
+     * @Vich\UploadableField(mapping="photos", fileNameProperty="file")
      * @var File
      */
     private $imageFile;
@@ -104,7 +104,7 @@ class Photo
         return $this->file;
     }
 
-    public function setFile(string $file): self
+    public function setFile(?string $file): self
     {
         $this->file = $file;
 
