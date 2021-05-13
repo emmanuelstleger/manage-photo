@@ -4,7 +4,19 @@
 
 {% block body %}
     <h1>Liste des Photos</h1>
-    <a href="{{ path('photo_new') }}" class="btn btn-success btn-lg mb-3">Mettre en ligne une photo</a>
+    <div class="row">
+        <div class="col-md-4">
+            {% for message in app.flashes('success') %}
+
+                <div class="alert alert-success">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
     <table class="table">
         <thead>
             <tr>

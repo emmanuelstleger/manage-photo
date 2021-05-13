@@ -41,6 +41,7 @@ class GalerieController extends AbstractController
             $entityManager->persist($galerie);
             $entityManager->flush();
 
+            $this->addFlash('success', 'La galerie a bien été créée');
             return $this->redirectToRoute('galerie_admin_index');
         }
 
@@ -76,6 +77,7 @@ class GalerieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'La galerie a bien été modifiée');
             return $this->redirectToRoute('galerie_admin_index');
         }
 
@@ -85,7 +87,6 @@ class GalerieController extends AbstractController
             $entityManager->persist($photo);
             $entityManager->flush();
         }
-
         return $this->render('galerie/edit.html.twig', [
             'galerie' => $galerie,
             'form' => $form->createView(),
@@ -103,7 +104,7 @@ class GalerieController extends AbstractController
             $entityManager->remove($galerie);
             $entityManager->flush();
         }
-
+        $this->addFlash('success', 'La galerie a bien été supprimée');
         return $this->redirectToRoute('galerie_admin_index');
     }
 }
