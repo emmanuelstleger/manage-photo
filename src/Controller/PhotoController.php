@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Photo;
 use App\Form\PhotoType;
 use App\Repository\PhotoRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,12 +18,33 @@ use Symfony\Component\Routing\Annotation\Route;
 class PhotoController extends AbstractController
 {
     /**
-     * @Route("/", name="photo_admin_index", methods={"GET"})
+     * @var PhotoRepository
      */
-    public function index(PhotoRepository $photoRepository): Response
+    private $photoRepository;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    public function __construct(PhotoRepository $photoRepository, EntityManagerInterface $em)
     {
+        $this->photoRepository = $photoRepository;
+        $this->em = $em;
+    }
+
+    /**
+     * @Route("/", name="photo_admin_index")
+     * @return Response
+     */
+    public function index(PaginatorInterface $paginator, Request $request): Response
+    {
+        $photos = $paginator->paginate(
+            $this->photoRepository->findAllVisibleQuery(),
+            $request->query->getInt('page', 1),
+            10
+        );
         return $this->render('photo/index.html.twig', [
-            'photos' => $photoRepository->findAll(),
+            'photos' => $photos
         ]);
     }
 

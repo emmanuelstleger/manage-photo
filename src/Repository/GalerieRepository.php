@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Galerie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +19,31 @@ class GalerieRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Galerie::class);
+    }
+
+    /**
+     * @return Query
+     */
+    public function findAllVisibleQuery(): Query
+    {
+        return $this->findVisibleQuery()
+            ->getQuery();
+    }
+
+    /**
+     * @return Galerie[]
+     */
+    public function findLatest(): array
+    {
+        return $this->findVisibleQuery()
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
+
+    private function findVisibleQuery(): QueryBuilder
+    {
+        return $this->createQueryBuilder('p');
     }
 
     // /**

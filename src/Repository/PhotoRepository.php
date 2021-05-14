@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Photo;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +19,31 @@ class PhotoRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Photo::class);
+    }
+
+    /**
+     * @return Query
+     */
+    public function findAllVisibleQuery(): Query
+    {
+        return $this->findVisibleQuery()
+            ->getQuery();
+    }
+
+    /**
+     * @return Photo[]
+     */
+    public function findLatest(): array
+    {
+        return $this->findVisibleQuery()
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+
+    private function findVisibleQuery(): QueryBuilder
+    {
+        return $this->createQueryBuilder('p');
     }
 
     // /**

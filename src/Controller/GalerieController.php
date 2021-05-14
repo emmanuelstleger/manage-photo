@@ -7,6 +7,8 @@ use App\Entity\Photo;
 use App\Form\GalerieType;
 use App\Form\PhotoType;
 use App\Repository\GalerieRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,12 +20,32 @@ use Symfony\Component\Routing\Annotation\Route;
 class GalerieController extends AbstractController
 {
     /**
-     * @Route("/", name="galerie_admin_index", methods={"GET"})
+     * @var GalerieRepository
      */
-    public function index(GalerieRepository $galerieRepository): Response
+    private $galerieRepository;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    public function __construct(GalerieRepository $galerieRepository, EntityManagerInterface $em)
     {
+        $this->galerieRepository = $galerieRepository;
+        $this->em = $em;
+    }
+    /**
+     * @Route("/", name="galerie_admin_index")
+     * @return Response
+     */
+    public function index(PaginatorInterface $paginator, Request $request): Response
+    {
+        $galeries = $paginator->paginate(
+            $this->galerieRepository->findAllVisibleQuery(),
+            $request->query->getInt('page', 1),
+            6
+        );
         return $this->render('galerie/index.html.twig', [
-            'galeries' => $galerieRepository->findAll(),
+            'galeries' => $galeries
         ]);
     }
 
