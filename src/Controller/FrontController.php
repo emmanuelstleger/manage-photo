@@ -32,14 +32,6 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/contact", name="front_contact", methods={"GET"})
-     */
-    public function frontContact()
-    {
-        return $this->render('front/contact.html.twig');
-    }
-
-    /**
      * @Route("/portfolio", name="front_portfolio", methods={"GET"})
      */
     public function frontPortfolio(GalerieRepository $galerieRepository)
