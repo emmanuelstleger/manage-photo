@@ -6,7 +6,7 @@
 
     <div id="fh5co-main">
         <div class="fh5co-narrow-content animate-box fh5co-border-bottom" data-animate-effect="fadeInLeft">
-            <h2 class="fh5co-heading" >{{ galerie.titre }}</span></h2>
+            <h2 class="fh5co-heading" >{{ galerie.titre }}</h2>
             <p>{{ galerie.description }}</p>
 
             {% for photo in galerie.photos %}
@@ -21,7 +21,6 @@
                 <p class="text-center"><a href="{{ path ('front_portfolio') }}" class="btn btn-primary btn-outline">Plus de photos</a></p>
             </div>
         </div>
-    </div>
     </div>
 
 {% endblock %}

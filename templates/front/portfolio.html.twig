@@ -9,11 +9,11 @@
 
             {% for galerie in galeries %}
 				<a class="gallery-item" href="{{ path('front_galerie', {'id': galerie.id}) }}">
-					<img src="{{ vich_uploader_asset(galerie) }}" alt="">
-					<span class="overlay">
+					<img src="{{ vich_uploader_asset(galerie) }}" alt="{{ galerie.description }}">
+					<div class="overlay">
 						<h2>{{ galerie.titre }}</h2>
 						<span>{{ galerie.description }}</span>
-					</span>
+					</div>
 				</a>
             {% endfor %}
 			</div>
